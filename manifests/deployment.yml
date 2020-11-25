@@ -1,19 +1,30 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "dzvnets-41e4"
+  name: arcadebackend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: "dzvnets-41e4"
+      name: arcadebackend      
+  minReadySeconds: 5
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: "dzvnets-41e4"
+        name: arcadebackend        
     spec:
       containers:
-        - name: "dzvnets-41e4"
-          image: "dzbuild.azurecr.io/dzvnets"
-          ports:
-          - containerPort: 3000
+      - name: arcadebackend
+        image: dzbuild.azurecr.io//azure-adventure-day-coach/gamebot:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+            name: calc-frontend         
+            protocol: TCP
+        env: 
+          - name: "PORT"
+            value: "8080"
+          - name: "PICK_STRATEGY"
+            value: "RANDOM"
