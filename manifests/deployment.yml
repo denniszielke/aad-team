@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "dzvnets-41e4"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "dzvnets-41e4"
+  template:
+    metadata:
+      labels:
+        app: "dzvnets-41e4"
+    spec:
+      containers:
+        - name: "dzvnets-41e4"
+          image: "dzbuild.azurecr.io/dzvnets"
+          ports:
+          - containerPort: 3000
