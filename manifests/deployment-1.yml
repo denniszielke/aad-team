@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "linkerd2-b480"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "linkerd2-b480"
+  template:
+    metadata:
+      labels:
+        app: "linkerd2-b480"
+    spec:
+      containers:
+        - name: "linkerd2-b480"
+          image: "dzbuild.azurecr.io/linkerd2"
+          ports:
+          - containerPort: 3000
